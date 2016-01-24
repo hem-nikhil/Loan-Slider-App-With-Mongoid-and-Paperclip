@@ -1,0 +1,46 @@
+// Place all the styles related to the loan controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.transaction-search-form{
+  height:100px;
+  background: #2a6a9a;
+}
+//.form-class{
+//  align-items:center;
+//  background-color: white;
+//}
+.field-class{
+  float: left;
+  height: 50px;
+  margin-top: 30px;
+  height:100px;
+  width: 1000px;
+}
+.fields{
+  height: 30px;
+  width: 150px;;
+  background-color: white;
+}
+#error_explanation
+{
+  width:90%!important;
+}
+.amount_slider{
+  width: 350px;
+}
+.tenure_slider{
+  width: 350px;
+}
+.offers{
+  //float: right !important;
+  margin-left: 65%;
+  width:10%;
+  height: 10%;
+  color: #a3a03a;
+  background: #f7f7f5;
+  padding: 7px 30px;
+}
+.display-tenure-text-box{
+  //width:50%;
+}

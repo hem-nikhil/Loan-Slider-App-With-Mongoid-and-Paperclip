@@ -1,0 +1,37 @@
+<div class="form-class"  >
+  <%= form_tag(loan_enquiry_path) do %>
+      <div class="field-class" id="loan-detail-param" style="float: left;"  align="center">
+          <%= select_tag "residency_type", options_for_select(["Resident Indian", "NRI"],"Resident Indian"),class:" fields"%>
+          <%= select_tag "empl_type", options_for_select(["Salaried", "Self Employed:Business", "Self Employed:Professional"],"Salaried"),class:" fields" %>
+          <%= number_field_tag "loan_amount" ,nil,placeholder:"Loan Amount in Rupees" ,class:" fields"%>
+          <%= number_field_tag "loan_tenure" ,nil,placeholder:"Loan Tenure in Years" ,class:" fields"%>
+      </div><br>
+      <div class="field-class" id="user-detail-param" style="float: left; display: none" align="center">
+        <%= text_field_tag "name" ,nil,placeholder:"Enter Name",required: true,class:" fields"%>
+        <%= email_field_tag "email" ,nil,placeholder:"Email Address",required: true,class:" fields"%>
+        <%= number_field_tag "mobile_number" ,nil,placeholder:"Mobile Number" ,required: true,class:" fields"%>
+        <%= submit_tag "SUBMIT",class:" fields" ,style:"background-color: #003366;color: white"%>
+      </div>
+  <% end %>
+  <div id="proceed-button">
+    <%= button_tag 'Proceed', onclick:"proceedToViewOffers()",class:"field-class fields",style:"background-color: #003366;color: white;" %>
+  </div>
+</div>
+
+<script>
+  function proceedToViewOffers(){
+
+    if((!document.getElementById("loan_amount").value) || (!document.getElementById("loan_tenure").value)) {
+      alert("Please Enter Loan amount and Loan tenure");
+    }
+    else{
+      var loanElement = document.getElementById("loan-detail-param");
+      loanElement.style.display= "none";
+      var loanElement = document.getElementById("proceed-button");
+      loanElement.style.display= "none";
+      var loanElement = document.getElementById("user-detail-param");
+      loanElement.style.display= "block";
+    }
+  }
+
+</script>

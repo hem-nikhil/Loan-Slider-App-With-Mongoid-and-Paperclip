@@ -1,0 +1,25 @@
+<div class="header" align='center'><h1 >******  RetailLending.com ****** </h1></div><br>
+<%if @errors.present? %>
+    <div id="error_explanation" width='70%'>
+      <table align="center" border="1" >
+        <tr style="width: 50%"><td >
+          <span style="padding: 5%; color: red">
+      ERRORS
+      <ul>
+        <%@errors.each do |field,error|%>
+            <%error.each do |err|%>
+                <li><%= "#{field.capitalize} -- #{err}" %></li>
+            <%end%>
+        <%end%>
+      </ul>
+            </span>
+        </td></tr>
+      </table>
+    </div>
+<%end%>
+<br><br><br>
+<div class="transaction-search-form">
+  <%= render partial: 'form' %>
+</div>
+
+<br><br>

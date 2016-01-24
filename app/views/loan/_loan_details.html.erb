@@ -1,0 +1,82 @@
+<br><br><br>
+<div class="offers">
+  <span style="font-size: 20px ">
+    <%= "#{bank_info[:bank_loan_details].size} " %> Offers<br><br>
+  </span>
+</div>
+
+<div>
+  <table border="1" cellpadding="20" cellspacing="0" align="center" style="background-color: #2a6a9a;" >
+    <tr>
+      <td>
+        <span style="color: white">
+          Select Loan Amount (in  &#8377 ) <br><br>
+        </span>
+        <div>
+          <input id="amount_slider" class="amount_slider" min="<%= bank_info[:limits][:lower_amount] %>" max="<%= bank_info[:limits][:upper_amount] %>"
+            step="10000" type="range" value="<%= bank_info[:loan_amount] %>" onchange="updateAmountTextbox()" />
+        </div>
+        <div>
+          <span style="color: white">
+            <%= bank_info[:limits][:lower_amount_msg] %>
+          </span>
+          <span style="color: white;margin-left: 70%;">
+            <%= bank_info[:limits][:upper_amount_msg] %>
+          </span>
+
+
+        </div>
+        <div class="display-amount-text-box" align="center">
+        <input id="display_amount" name="display_amount" type="number" value="<%= bank_info[:loan_amount] %>" onchange="updateEmi()"
+               min="<%= GlobalConstant::LOAN_AMOUNT[:min_lower_amount] %>" max="<%= GlobalConstant::LOAN_AMOUNT[:max_upper_amount] %>" />
+          </div>
+      </td>
+      <td>
+        <span style="color: white">
+          Select Loan Tenure (in Years)<br><br>
+        </span>
+        <div>
+          <input id="tenure_slider" class="tenure_slider" min="<%= bank_info[:limits][:lower_tenure] %>" max="<%= bank_info[:limits][:upper_tenure] %>"
+                 step="1" type="range" value="<%= bank_info[:loan_tenure] %>" onchange="updateTenureTextbox()" />
+        </div>
+        <div>
+          <span style="color: white;">
+            <%= bank_info[:limits][:lower_tenure_msg] %>
+          </span>
+          <span style="color: white;margin-left: 70%;">
+            <%= bank_info[:limits][:upper_tenure_msg] %>
+          </span>
+        </div>
+        <div class="display-tenure-text-box" align="center">
+          <input id="display_tenure" name="display_tenure" type="number" value="<%= bank_info[:loan_tenure] %>" onchange="updateEmi()"
+                 min="<%= GlobalConstant::LOAN_TENURE[:lower_tenure] %>" max="<%= GlobalConstant::LOAN_TENURE[:upper_tenure] %>"/>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div><br><br>
+
+
+<table class="table-loan" border="1" cellpadding="0" cellspacing="0" align="center">
+  <tr style="font-size: 25px;font-weight: bold; background-color: #9f9f9f; text-align: center;">
+    <td style="width: 200px;">Bank</td>
+    <td style="width: 200px;">Intrest Rate</td>
+    <td style="width: 200px;" >Charges</td>
+    <td style="width: 200px;" >EMI</td>
+
+  </tr>
+  <% bank_info[:bank_loan_details].each do |detail| %>
+      <tr class="textmiddleAlign leftPadding"  style="text-align: center;vertical-align: middle;">
+
+        <td>
+          <%= image_tag (detail[:logo].present? ? detail[:logo].url : nil), alt: detail[:bank_name],size:"150x50",style:"padding: 10%" %>
+        <td>
+          <div><%= "#{detail[:rate]}\%" %></div>
+          <%= detail[:rate_type]  %>
+        </td>
+        <td> &#8377  <%= "#{detail[:charges].to_i}"  %></td>
+        <td> &#8377 <%= detail[:emi].to_i %></td>
+      </tr>
+  <% end %>
+</table>
+<input type="hidden" value="<%= bank_info[:user_id] %>" id="user_id">

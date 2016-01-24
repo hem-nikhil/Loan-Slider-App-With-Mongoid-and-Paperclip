@@ -1,0 +1,6 @@
+<h1>Image#new</h1>
+<%= form_for( :bank_logo, :url => {:action => 'create'},     :html => {:multipart => true}) do |f| %>
+    <%= f.text_field :bank_name %>
+    <%= f.file_field :logo %>
+    <%= f.submit "Upload" %>
+<% end %>

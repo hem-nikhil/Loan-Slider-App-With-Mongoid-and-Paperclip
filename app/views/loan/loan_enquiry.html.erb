@@ -1,0 +1,49 @@
+<%if @bank_info[:error_messages].present? %>
+    <div id="error_explanation" width='70%'>
+      <table align="center" border="1" >
+        <tr style="width: 50%"><td >
+          <span style="padding: 5%; color: red">
+      ERRORS
+      <ul>
+        <%@bank_info[:error_messages].each do |msg|%>
+                <li><%= "#{msg}" %></li>
+        <%end%>
+      </ul>
+        </span>
+        </td></tr>
+      </table>
+    </div>
+<%end%>
+
+<div id="loan-details-display" class="loan-details-display">
+  <%= render partial: 'loan_details',locals:{ bank_info: @bank_info }%>
+</div>
+<script>
+  function updateAmountTextbox(){
+    var amountToUpdate = document.getElementById("amount_slider").value;
+    document.getElementById("display_amount").value = amountToUpdate;
+    updateEmi();
+  }
+
+  function updateTenureTextbox(){
+    var tenureToUpdate = document.getElementById("tenure_slider").value;
+    document.getElementById("display_tenure").value = tenureToUpdate;
+    updateEmi();
+  }
+    function updateEmi(){
+      var loan_amount = document.getElementById("display_amount").value;
+      var loan_tenure = document.getElementById("display_tenure").value;
+      var user_id = document.getElementById("user_id").value;
+      $.ajax({
+        type:'POST',
+        url: '/loan-enquiry',
+        data: $.param({ loan_amount: loan_amount,loan_tenure:loan_tenure ,user_id:user_id}),
+        success: function(response){
+          $("#loan-details-display").html(response);
+        },
+        error:function(response){
+          alert("error");
+        }
+      });
+    }
+</script>
