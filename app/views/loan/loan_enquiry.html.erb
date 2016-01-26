@@ -1,3 +1,5 @@
+<div id="loan-slider-display">
+<a href="/">Home Page</a>
 <%if @bank_info[:error_messages].present? %>
     <div id="error_explanation" width='70%'>
       <table align="center" border="1" >
@@ -18,6 +20,7 @@
 <div id="loan-details-display" class="loan-details-display">
   <%= render partial: 'loan_details',locals:{ bank_info: @bank_info }%>
 </div>
+  </div>
 <script>
   function updateAmountTextbox(){
     var amountToUpdate = document.getElementById("amount_slider").value;
@@ -39,7 +42,7 @@
         url: '/loan-enquiry',
         data: $.param({ loan_amount: loan_amount,loan_tenure:loan_tenure ,user_id:user_id}),
         success: function(response){
-          $("#loan-details-display").html(response);
+          $("#loan-slider-display").html(response);
         },
         error:function(response){
           alert("error");

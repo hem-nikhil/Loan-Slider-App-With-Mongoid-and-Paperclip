@@ -48,10 +48,11 @@ class LoanCalc
       error_messages << "Loan Amount Should be Between #{GlobalConstant::LOAN_AMOUNT[:min_lower_amount]} and #{GlobalConstant::LOAN_AMOUNT[:max_upper_amount]}"
     end
     if loan_tenure > GlobalConstant::LOAN_TENURE[:upper_tenure] || loan_tenure < GlobalConstant::LOAN_TENURE[:lower_tenure]
-      error_messages << "Loan Tenure Should be Between #{GlobalConstant::LOAN_TENURE[:upper_tenure]} and #{GlobalConstant::LOAN_TENURE[:lower_tenure]}"
+      error_messages << "Loan Tenure Should be Between #{GlobalConstant::LOAN_TENURE[:lower_tenure]} and #{GlobalConstant::LOAN_TENURE[:upper_tenure]}"
     end
     error_messages
   end
+  
   def get_bounds_in_words(range)
     length = range.to_s.split("").count
     case length
